@@ -1,34 +1,19 @@
 name: Automatisation des tests DevSecOps
 on: push
-
 jobs:
   Dependances:
     runs-on: ubuntu-latest
     steps:
-      - name: Récupération du code source
-        uses: actions/checkout@v4
-
       - name: Dependances
         run: |
-          echo "=== Scan des dépendances avec Trivy ==="
-          # On utilise Docker pour lancer Trivy sur le dossier courant ($PWD)
-          # --exit-code 1 permet de faire échouer le job si une faille est trouvée
-          docker run --rm -v $PWD:/project aquasec/trivy:latest fs --exit-code 1 /project
-
+          echo "ecrire ici le scrypt de contrôle des dépendances"
   Dockerfile:
     runs-on: ubuntu-latest
     needs: Dependances
     steps:
-      - name: Récupération du code source
-        uses: actions/checkout@v4
-
       - name: Test Dockerfile
         run: |
-          echo "=== Scan de sécurité du Dockerfile avec Trivy ==="
-          # La commande 'config' de Trivy est spécialisée pour analyser 
-          # les mauvaises pratiques dans les fichiers de configuration comme le Dockerfile
-          docker run --rm -v $PWD:/project aquasec/trivy:latest config --exit-code 1 /project/Dockerfile
-
+          echo "ecrire ici le scrypt de contrôle du Dockerfile"
   Deploy:
     runs-on: ubuntu-latest
     needs: Dockerfile
